@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Pitchforknzb Options</title>
+    <link rel="stylesheet" href="options.css" />
+    <script type="text/javascript" src="../lib/jquery-1.6.min.js"></script>
+</head>
+<body>
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    var api_username = localStorage["api_username"];
+    var api_key = localStorage["api_key"];
+
+    if(api_username !== undefined) {
+        $("#api_username").val(api_username);
+    }
+
+    if(api_key !== undefined) {
+        $("#api_key").val(api_key);
+    }
+
+    $("button#save").click(function(){
+        localStorage["api_username"] = $("#api_username").val();
+        localStorage["api_key"] = $("#api_key").val();
+        alert("saved");
+    });
+
+    $("button#clear").click(function(){
+        localStorage.removeItem("api_username");
+        localStorage.removeItem("api_key");
+        location.reload();
+    });
+
+});
+
+</script>
+
+<h1>Pitchforknzb Options</h1>
+
+    <div id="form">
+    <fieldset>
+    <legend>Enter your NzbMatrix credentials:</legend>
+    <ol>
+        <li>
+            <label for="api_username">Username</label>
+            <input id="api_username" name="api_username" type="text" placeholder="NzbMatrix Username" >
+        </li>
+        <li>
+            <label for="api_key">API Key</label>
+            <input id="api_key" name="api_key" type="text" placeholder="NzbMatrix API Key" >
+        </li>
+    </ol>
+    </fieldset>
+
+    <button id="save" name="save">Save</button>
+    <button id="clear" name="clear">Clear Form</button>
+
+    </div>
+</body>
+</html>

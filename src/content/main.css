@@ -1,0 +1,49 @@
+/* Content CSS */
+
+#ptchfrknzb-flag {
+    
+}
+
+#ptchfrknzb-panel {
+    padding: 5px;
+    border: 1px solid #EAEAEA;
+    display: none;
+    margin:20px 0px;
+}
+
+#ptchfrknzb-panel .header {
+
+}
+
+#ptchfrknzb-panel .header .info {
+    padding:10px 3px;
+    color:#EFEFEF;
+}
+
+#ptchfrknzb-panel .results-list-row {
+    margin-top: 10px;
+}
+
+
+#ptchfrknzb-panel .results-list-row .name {
+    font-weight:bold;
+    color:#EF4135;
+    margin-bottom:2px;
+}
+#ptchfrknzb-panel .results-list-row .bookmark,
+    #ptchfrknzb-panel .results-list-row .download {
+    font-weight:bold;
+    margin-right:1em;
+}
+#ptchfrknzb-panel .results-list-row .size {
+    font-weight:normal;
+    font-style:italic;
+    margin-right: 1em;
+}
+
+#ptchfrknzb-panel .success {
+    color:green;
+}
+#ptchfrknzb-panel .error {
+    color:#ff4500;
+}
