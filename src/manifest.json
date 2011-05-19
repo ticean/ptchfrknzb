@@ -1,7 +1,7 @@
 {
   "name": "Ptchfrknzb",
   "id": "ef7948a7688542cc9cf570108c7aa825",
-  "description": "Scrapin' tunes since 2011.",
+  "description": "Chroming tunes since 2011.",
   "version": "0.1.0",
   "permissions": [
     "http://api.nzbmatrix.com/",
