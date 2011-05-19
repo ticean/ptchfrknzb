@@ -70,15 +70,17 @@ var Pitchfork = Site.extend({
 
         // Actions ----
         // Bookmark in NzbMatrix
+        var app = this.app;
         $("#ptchfrknzb-panel .bookmark a").click( function() {
             var id = $(this).attr("id");
             console.log("Ptchfrknzb: Bookmarking " + id);
             chrome.extension.sendRequest({'action': 'doSearchApiRequest',
-                'url': nzbMatrix.getAddBookmarkRequest(id)}, function(rawResponse) {
+                'url': app.nzbMatrix.getAddBookmarkRequest(id), instanceKey: app.instanceKey}, function(response) {
+                // TODO: Get this out of here...
                 var status = "";
                 var err = true;
-                rawResponse = rawResponse.trim().replace(/\n/g, "");
-                switch(rawResponse) {
+                data = response.data.trim().replace(/\n/g, "");
+                switch(data) {
                     case "error:invalid_login":
                         status = "There is a problem with the username you have provided.";
                         break;
