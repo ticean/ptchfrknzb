@@ -2,7 +2,7 @@
   "name": "Ptchfrknzb",
   "id": "ef7948a7688542cc9cf570108c7aa825",
   "description": "Scrapin' tunes since 2011.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "permissions": [
     "http://api.nzbmatrix.com/",
     "https://api.nzbmatrix.com/"
@@ -15,10 +15,12 @@
        "lib/dump.js",
        "lib/jquery-1.6.1.js",
        "lib/underscore.js",
-       "lib/backbone.js",
        "lib/toolbox.js",
-       "lib/mustache.js",
-       "lib/ptchfrknzb.js",
+       "lib/ptchfrknzb/NzbMatrix.js",
+       "lib/ptchfrknzb/Site.js",
+       "lib/ptchfrknzb/SiteFactory.js",
+       "lib/ptchfrknzb/sites/Pitchfork.js",
+       "lib/ptchfrknzb/Application.js",
        "content/main.js"
      ],
      "css": [

@@ -1,4 +1,3 @@
-
 /**
  * NzbMatrix.
  * Doing NzBizness.
@@ -11,8 +10,8 @@ var NzbMatrix = Toolbox.Base.extend({
     maxResults: '10',
 
     constructor: function(options) {
-        this.key = options.key;
-        this.username = options.username;
+        this.key = options.api_key;
+        this.username = options.api_username;
     },
 
     getAddBookmarkRequest: function(id) {
@@ -65,21 +64,5 @@ var NzbMatrix = Toolbox.Base.extend({
             console.log("Can't parse search results.", e);
             return false;
         }
-    }
-});
-
-/**
- * Scrapes the page for the appropriate search.
- */
-var Scraper = Toolbox.Base.extend({
-    site: "",
-    constructor: function(){
-
-    },
-    scrape: function(){
-        return $(".artists").text().trim();
-    },
-    place: function(){
-
     }
 });

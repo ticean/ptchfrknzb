@@ -6,7 +6,7 @@
 *     HTTP status of 200, this function is called with a JSON decoded
 *     response.  Otherwise, this function is called with null.
 */
-function doSearchApiRequest(url, callback) {
+function doSearchApiRequest(instanceKey, url, callback) {
     var xhr = new XMLHttpRequest();
     console.log("Ptchfrknzb: SearchAPI Request: " + url);
     xhr.onreadystatechange = function(data) {
@@ -14,7 +14,8 @@ function doSearchApiRequest(url, callback) {
             if (xhr.status == 200) {
                 var data = xhr.responseText;
                 console.log("Ptchfrknzb: SearchAPI Raw Response: " + data);
-                callback(data);
+                var response = {instanceKey: instanceKey, data: data};
+                callback(response);
             } else {
                 callback(null);
             }
@@ -43,11 +44,12 @@ function getLocalStorage(key, callback) {
 */
 function onRequest(request, sender, callback) {
     if (request.action == 'doSearchApiRequest') {
-        doSearchApiRequest(request.url, callback);
+        doSearchApiRequest(request.instanceKey, request.url, callback);
     }
     if (request.action == 'getSettings') {
         var settings = localStorage;
-        callback(settings);
+        var response = {instanceKey: request.instanceKey, settings: settings};
+        callback(response);
     }
 };
 
