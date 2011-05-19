@@ -2,26 +2,18 @@
 
 chrome.extension.sendRequest({'action': 'getSettings'}, function(settings) {
 
-    var options = {};
-    options.key = settings.api_key,
-    options.username = settings.api_username
+    var options = {key: settings.api_key, username: settings.api_username };
 
-    var nzbMatrix = new SearchService(options);
+    var nzbMatrix = new NzbMatrix(options);
     var pitchfork = new Scraper();
     var url = nzbMatrix.getSearchRequest(pitchfork.scrape());
 
     // Send a request to fetch data from NzbMatrix API.
     if(url) {
         chrome.extension.sendRequest({'action': 'doSearchApiRequest', 'url': url}, function(rawResponse) {
-            try {
-                var json = nzbMatrix.parseData(rawResponse);
-                var obj = jQuery.parseJSON(json);
-                console.log(obj);
-                obj.formatSize = function() {
-                    return function(text, render) {
-                        return render(text);
-                    }
-                };
+
+            var obj = nzbMatrix.getSearchResult(rawResponse);
+            if(obj) {
 
                 // Build search result content.
                 var record = obj.results;
@@ -120,10 +112,6 @@ chrome.extension.sendRequest({'action': 'getSettings'}, function(settings) {
                     console.log("Ptchfrknzb: Queueing " + $(this).attr("href"));
                     return false;
                 });
-                
-            } catch(e) {
-                // TODO: Add debug mode here...
-                console.error("Ptchfrknzb caught an error :(", e);
             }
 
         });

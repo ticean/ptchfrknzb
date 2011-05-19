@@ -1,9 +1,9 @@
 
 /**
- * AKA: NzbMatrix.
+ * NzbMatrix.
+ * Doing NzBizness.
  */
-var SearchService = Toolbox.Base.extend({
-    options: {},
+var NzbMatrix = Toolbox.Base.extend({
     key: '',
     username: '',
     baseUrl: 'https://api.nzbmatrix.com/v1.1/',
@@ -11,7 +11,6 @@ var SearchService = Toolbox.Base.extend({
     maxResults: '10',
 
     constructor: function(options) {
-        this.options = options;
         this.key = options.key;
         this.username = options.username;
     },
@@ -32,7 +31,7 @@ var SearchService = Toolbox.Base.extend({
         return url;
     },
 
-    parseData: function(data){
+    parseSearchData: function(data){
         if(data == '' || data === undefined) return false;
         var records = [];
         var data = jQuery.trim(data.substring(0, data.length-1));
@@ -56,6 +55,16 @@ var SearchService = Toolbox.Base.extend({
         }
         var json = '{"results": [' + records.join(',') + ']}';
         return json;
+    },
+
+    getSearchResult: function(data) {
+        try {
+            var json = this.parseSearchData(data);
+            return jQuery.parseJSON(json);
+        } catch(e) {
+            console.log("Can't parse search results.", e);
+            return false;
+        }
     }
 });
 
