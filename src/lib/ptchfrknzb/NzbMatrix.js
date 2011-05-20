@@ -56,6 +56,53 @@ var NzbMatrix = Toolbox.Base.extend({
         return json;
     },
 
+    /**
+     * Parse the response from a bookmark attempt.
+     */
+    parseBookmarkResponse: function(data){
+        var status, error;
+
+        data = data.trim().replace(/\n/g, "");
+        error = true;
+        switch(data) {
+            case "error:invalid_login":
+                status = "There is a problem with the username you have provided.";
+                break;
+            case "error:invalid_api":
+                status = "There is a problem with the API Key you have provided."
+                break;
+            case "error:invalid_nzbid":
+                status = "There is a problem with the NZBid supplied.";
+                break;
+            case "error:vip_only":
+                status = "You need to be VIP or higher to access.";
+                break;
+            case "error:disabled_account":
+                status = "User Account Disabled.";
+                break;
+            case "error:no_nzb_found":
+                status = "No NZB found."
+                break;
+            case "RESULT:bookmark_added;":
+                status = "Bookmark Added!";
+                error = false;
+                break;
+            case "RESULT:bookmark_added_already;":
+                status = "Bookmark added already.";
+                error = false;
+                break;
+            case "RESULT:bookmark_not_found;":
+                status = "Bookmark not found.";
+                break;
+            case "RESULT:bookmark_removed;":
+                status = "Somehow you removed a bookmark. WTF?"
+                break;
+            default:
+                status = "API error... ;ofrk.";
+        }
+        return {error: error, status: status};
+    },
+
     getSearchResult: function(data) {
         try {
             var json = this.parseSearchData(data);

@@ -56,6 +56,7 @@ var Pitchfork = Site.extend({
                     "<div id=results-list>" + rows + "</div>" +
                 "</div>";
 
+
         // Add flag indicating results found..
         $(".tombstone-cover-image").after(flag);
         var pos = $(".tombstone-cover-image").position();
@@ -73,53 +74,12 @@ var Pitchfork = Site.extend({
         var app = this.app;
         $("#ptchfrknzb-panel .bookmark a").click( function() {
             var id = $(this).attr("id");
-            console.log("Ptchfrknzb: Bookmarking " + id);
-            chrome.extension.sendRequest({'action': 'doSearchApiRequest',
-                'url': app.nzbMatrix.getAddBookmarkRequest(id), instanceKey: app.instanceKey}, function(response) {
-                // TODO: Get this out of here...
-                var status = "";
-                var err = true;
-                data = response.data.trim().replace(/\n/g, "");
-                switch(data) {
-                    case "error:invalid_login":
-                        status = "There is a problem with the username you have provided.";
-                        break;
-                    case "error:invalid_api":
-                        status = "There is a problem with the API Key you have provided."
-                        break;
-                    case "error:invalid_nzbid":
-                        status = "There is a problem with the NZBid supplied.";
-                        break;
-                    case "error:vip_only":
-                        status = "You need to be VIP or higher to access.";
-                        break;
-                    case "error:disabled_account":
-                        status = "User Account Disabled.";
-                        break;
-                    case "error:no_nzb_found":
-                        status = "No NZB found."
-                        break;
-                    case "RESULT:bookmark_added;":
-                        status = "Bookmark Added!";
-                        err = false;
-                        break;
-                    case "RESULT:bookmark_added_already;":
-                        status = "Bookmark added already.";
-                        err = false;
-                        break;
-                    case "RESULT:bookmark_not_found;":
-                        status = "Bookmark not found.";
-                        break;
-                    case "RESULT:bookmark_removed;":
-                        status = "Somehow you removed a bookmark. WTF?"
-                        break;
-                    default:
-                        status = "Don't think that worked...";
-                        err = true;
-                }
-                var statusEl = $("#ptchfrknzb-panel .results-list-row."+id+" .status");
-                var style = err? "error":"success";
-                statusEl.text(status).removeClass("error success").addClass(style);
+            chrome.extension.sendRequest({'action': 'doSearchApiRequest', 'url': app.nzbMatrix.getAddBookmarkRequest(id),
+                instanceKey: app.instanceKey}, function(response) {
+                    var data  = app.nzbMatrix.parseBookmarkResponse(response.data);
+                    var style = data.error? "error":"success";
+                    var el = $("#ptchfrknzb-panel .results-list-row."+id+" .status");
+                    el.text(data.status).removeClass("error success").addClass(style);
             });
             return false;
         });
