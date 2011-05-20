@@ -1,7 +1,7 @@
 {
 "name": "Ptchfrknzb",
 "description": "Chroming tunes since 2011.",
-"version": "0.1.0",
+"version": "0.1.1",
 "homepage_url": "https://github.com/ticean/ptchfrknzb",
 "icons": {
     "16": "images/icon-16.png",
@@ -41,7 +41,7 @@
 {
   "id": "ptchfrknzb_action",
   "name": "ptchfrknzb_page_action",
-  "icons": ["images/icon.png"]
+  "icons": ["images/icon-16.png"]
 }
 ]
 }
