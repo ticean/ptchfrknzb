@@ -1,42 +1,47 @@
 {
-  "name": "Ptchfrknzb",
-  "id": "ef7948a7688542cc9cf570108c7aa825",
-  "description": "Chroming tunes since 2011.",
-  "version": "0.1.0",
-  "permissions": [
-    "http://api.nzbmatrix.com/",
-    "https://api.nzbmatrix.com/"
-  ],
-  "options_page": "options/options.html",
-  "background_page": "background/background.html",
-  "content_scripts": [
-   {
-     "js": [
-       "lib/dump.js",
-       "lib/jquery-1.6.1.js",
-       "lib/underscore.js",
-       "lib/toolbox.js",
-       "lib/ptchfrknzb/NzbMatrix.js",
-       "lib/ptchfrknzb/Site.js",
-       "lib/ptchfrknzb/SiteFactory.js",
-       "lib/ptchfrknzb/sites/Pitchfork.js",
-       "lib/ptchfrknzb/Application.js",
-       "content/main.js"
-     ],
-     "css": [
-       "content/main.css"
-     ],
-     "matches": [
-      "http://www.pitchfork.com/reviews/albums/*",
-      "http://pitchfork.com/reviews/albums/*"
-     ]
-    }
-  ],
-  "page_actions": [
-    {
-      "id": "ptchfrknzb_action",
-      "name": "ptchfrknzb_page_action",
-      "icons": ["images/icon.png"]
-    }
-  ]
+"name": "Ptchfrknzb",
+"description": "Chroming tunes since 2011.",
+"version": "0.1.0",
+"homepage_url": "https://github.com/ticean/ptchfrknzb",
+"icons": {
+    "16": "images/icon-16.png",
+    "48": "images/icon-48.png",
+    "128": "images/icon-128.png"
+},
+"permissions": [
+"http://api.nzbmatrix.com/",
+"https://api.nzbmatrix.com/"
+],
+"options_page": "options/options.html",
+"background_page": "background/background.html",
+"content_scripts": [
+{
+ "js": [
+   "lib/dump.js",
+   "lib/jquery-1.6.1.js",
+   "lib/underscore.js",
+   "lib/toolbox.js",
+   "lib/ptchfrknzb/NzbMatrix.js",
+   "lib/ptchfrknzb/Site.js",
+   "lib/ptchfrknzb/SiteFactory.js",
+   "lib/ptchfrknzb/sites/Pitchfork.js",
+   "lib/ptchfrknzb/Application.js",
+   "content/main.js"
+ ],
+ "css": [
+   "content/main.css"
+ ],
+ "matches": [
+  "http://www.pitchfork.com/reviews/albums/*",
+  "http://pitchfork.com/reviews/albums/*"
+ ]
+}
+],
+"page_actions": [
+{
+  "id": "ptchfrknzb_action",
+  "name": "ptchfrknzb_page_action",
+  "icons": ["images/icon.png"]
+}
+]
 }
