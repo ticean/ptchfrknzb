@@ -47,10 +47,22 @@ var Application = Toolbox.Base.extend({
     },
 
     doSearch: function() {
-        var url = this.nzbMatrix.getSearchRequest(this.plugin.scrape());
-        if(url){
-            chrome.extension.sendRequest({'action': 'doSearchApiRequest', 'url': url, 'instanceKey': this.instanceKey},
-                    this.handleSearchResults);
+        var params, url;
+
+        params = {
+            needle: this.plugin.scrape(),
+            categoryId: this.plugin.settings.nzbMatrix.categoryId,
+            maxResults: this.plugin.settings.nzbMatrix.maxResults
+        };
+
+        try {
+            url = this.nzbMatrix.getSearchRequest(params);
+            if(url){
+                chrome.extension.sendRequest({'action': 'doSearchApiRequest', 'url': url, 'instanceKey': this.instanceKey},
+                        this.handleSearchResults);
+            }
+        } catch(e) {
+            console.error("Ptchfrknzb: Exception while searching: " + e);
         }
     },
 

@@ -4,13 +4,11 @@
 var Pitchfork = Plugin.extend({
 
     pluginId: 'pitchfork',
-    app: null,
-
-    constructor: function(settings){
-        if(settings){
-            if(settings.app){
-                this.app = settings.app;
-            }
+    
+    settings: {
+        nzbMatrix: {
+            categoryId: 22,
+            maxResults: 20
         }
     },
 

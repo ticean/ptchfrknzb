@@ -6,8 +6,6 @@ var NzbMatrix = Toolbox.Base.extend({
     key: '',
     username: '',
     baseUrl: 'https://api.nzbmatrix.com/v1.1/',
-    categoryId: '22',
-    maxResults: '10',
 
     constructor: function(options) {
         this.key = options.api_key;
@@ -22,10 +20,18 @@ var NzbMatrix = Toolbox.Base.extend({
         return url;
     },
 
-    getSearchRequest: function(needle) {
-        if(needle == "") return false;
-        var url = encodeURI(this.baseUrl + "search.php?username=" + this.username + "&apikey=" + this.key + "&catid=" +
-                this.categoryId + "&maxhits=" + this.maxResults + "&search=" + needle);
+    getSearchRequest: function(params) {
+        var catid, maxhits, url;
+        if(_.isUndefined(params)) throw("Search params not provided.");
+        if(!_.isString(params.needle)) return false;
+        catid = _.isNumber(params.categoryId)? "&catid=" + params.categoryId : "";
+        maxhits = _.isNumber(params.maxResults)? "&maxhits=" + params.maxResults : "";
+
+        url = this.baseUrl + "search.php?username=" + this.username + "&apikey=" + this.key + "&search=" + params.needle;
+        url += catid;
+        url += maxhits
+        url = encodeURI(url);
+
         console.log("Ptchfrknzb: SearchAPI Request: " + url);
         return url;
     },
