@@ -3,7 +3,13 @@
  */
 var Plugin = Toolbox.Base.extend({
 
-    siteKey: null,
+    pluginId: null,
+    settings: {
+        nzbMatrix: {
+            categoryId: null,
+            maxResults: null
+        }
+    },
     app: null,
 
     constructor: function(settings){return;},
