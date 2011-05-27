@@ -1,10 +1,9 @@
 /**
  * Scrapes the page for the appropriate search.
  */
-var Site = Toolbox.Base.extend({
+var Plugin = Toolbox.Base.extend({
 
     siteKey: null,
-    
     app: null,
 
     constructor: function(settings){return;},

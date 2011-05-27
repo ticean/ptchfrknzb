@@ -22,9 +22,9 @@
    "lib/underscore.js",
    "lib/toolbox.js",
    "lib/ptchfrknzb/NzbMatrix.js",
-   "lib/ptchfrknzb/Site.js",
-   "lib/ptchfrknzb/SiteFactory.js",
-   "lib/ptchfrknzb/sites/Pitchfork.js",
+   "lib/ptchfrknzb/Plugin.js",
+   "lib/ptchfrknzb/PluginFactory.js",
+   "lib/ptchfrknzb/plugins/Pitchfork.js",
    "lib/ptchfrknzb/Application.js",
    "content/main.js"
  ],

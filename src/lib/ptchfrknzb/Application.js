@@ -7,7 +7,7 @@ var Application = Toolbox.Base.extend({
     
     settings: {},
     nzbMatrix: {},
-    pitchfork: {},
+    plugin: {},
     currentSearch: "",
 
     constructor: function(instanceKey){
@@ -19,9 +19,10 @@ var Application = Toolbox.Base.extend({
             this.settings = settings;
             this.settings.app = this;
             this.nzbMatrix = new NzbMatrix(this.settings);
-            this.pitchfork = new SiteFactory().getSite('pitchfork', this.settings);
+            this.plugin = new PluginFactory().loadByType('pitchfork', this.settings);
         }catch(e){
             console.error("Ptchfrknzb: error initializing app.", e);
+            return;
         }
         this.doSearch();
     },
@@ -46,7 +47,7 @@ var Application = Toolbox.Base.extend({
     },
 
     doSearch: function() {
-        var url = this.nzbMatrix.getSearchRequest(this.pitchfork.scrape());
+        var url = this.nzbMatrix.getSearchRequest(this.plugin.scrape());
         if(url){
             chrome.extension.sendRequest({'action': 'doSearchApiRequest', 'url': url, 'instanceKey': this.instanceKey},
                     this.handleSearchResults);
@@ -57,7 +58,7 @@ var Application = Toolbox.Base.extend({
         var instance = window[response.instanceKey];
         var results = instance.nzbMatrix.getSearchResult(response.data);
         if(results){
-            instance.pitchfork.place(results);
+            instance.plugin.place(results);
         }
     }
 

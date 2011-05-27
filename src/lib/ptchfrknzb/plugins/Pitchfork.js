@@ -1,9 +1,9 @@
 /**
  * Scrapes the page for the appropriate search.
  */
-var Pitchfork = Site.extend({
+var Pitchfork = Plugin.extend({
 
-    siteKey: null,
+    pluginId: 'pitchfork',
     app: null,
 
     constructor: function(settings){
