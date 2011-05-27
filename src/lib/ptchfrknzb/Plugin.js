@@ -3,7 +3,7 @@
  */
 var Plugin = Toolbox.Base.extend({
 
-    siteKey: null,
+    pluginId: null,
     app: null,
 
     constructor: function(settings){return;},
