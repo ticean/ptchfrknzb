@@ -12,16 +12,6 @@ var Pitchfork = Plugin.extend({
         }
     },
 
-    app: null,
-
-    constructor: function(settings){
-        if(settings){
-            if(settings.app){
-                this.app = settings.app;
-            }
-        }
-    },
-
     /**
      * Scrapes the search terms from the site.
      */

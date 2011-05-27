@@ -2,7 +2,7 @@
  * Scrapes the page for the appropriate search.
  */
 var Plugin = Toolbox.Base.extend({
-
+    app: null,
     pluginId: null,
     settings: {
         nzbMatrix: {
@@ -10,9 +10,18 @@ var Plugin = Toolbox.Base.extend({
             maxResults: null
         }
     },
-    app: null,
 
-    constructor: function(settings){return;},
+    /**
+     * Sets a reference to the application.
+     * @param initData
+     */
+    constructor: function(initData){
+        if(initData){
+            if(initData.app){
+                this.app = initData.app;
+            }
+        }
+    },
 
     /**
      * Scrapes the site for the search term.
