@@ -12,10 +12,12 @@ NzbMatrix bookmarks are the supported method of taking action. It's super simple
 Plugins can provide category id's so the bookmark feeds can be sorted.
 
 
+
 ### Supported Sites ###
 Ptchfrknzb currently supports searching while browsing album reviews on Pitchfork.com.
 
 But is designed to be extensible. Plugins can be written for any site. IMDB and others are on the short list.
+
 
 
 ### Writing Plugins ###
@@ -29,20 +31,19 @@ Plugins can also set some basic NzbMatrix settings.
 
 
 ### Contributing ###
---------------------------------------------------
 If there's a site you'd like to see supported, your best bet is to frkndsbmtpllrqst.
 
 
 
+
 ### The TODO List: ###
------------------------------------
 - Fix the ugly stuff.
 - Add more plugins!
 
 
+-----------------------------------
 
 ### LICENSE ###
------------------------------------
 
 Copyright 2011, Ptchfrknzb.com
 
