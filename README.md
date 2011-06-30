@@ -1,33 +1,29 @@
 Ptchfrknzb
 ===========================
 
-Ptchfrknzb is a Chrome Extension that scrapes websites for search terms and searches NzbMatrix for results.
-It presents search results within the webpage, and lets the user take action.
+Ptchfrknzb is a Chrome browser extension that scrapes the content of a webpage and searches NzbMatrix.
+
+It presents the NzbMatrix search results within the webpage, and lets the user take action.
 
 It's like CouchPotato's Automatic Movie Downloader, but it leaves out the vowels.
+
+
+### Supported Sites ###
+Ptchfrknzb has a plugin system, so you can write plugins for any site. Currently supported sites:
+
+ - Pitchfork.com
+
+
+### Writing Plugins ###
+Plugins are simple to write. Simply implement 2 methods:
+
+ - scrape(): Define how you'd like your plugin to scrape content.
+ - place() Define how you'd like to render the results.
 
 
 ### NzbMatrix and Downloads ###
 NzbMatrix bookmarks are the supported method of taking action. It's super simple to set up an RSS watch from sabnzbd.
 Plugins can provide category id's so the bookmark feeds can be sorted.
-
-
-
-### Supported Sites ###
-Ptchfrknzb currently supports searching while browsing album reviews on Pitchfork.com.
-
-But is designed to be extensible. Plugins can be written for any site. IMDB and others are on the short list.
-
-
-
-### Writing Plugins ###
-Plugins are fairly simple to write. Simply implement 2 methods:
-
- - scrape() provides site-specific scraping for search terms.
- - place() renders search results out to screen.
-
-Plugins can also set some basic NzbMatrix settings.
-
 
 
 ### Contributing ###
@@ -37,15 +33,15 @@ If there's a site you'd like to see supported, your best bet is to frkndsbmtpllr
 
 
 ### The TODO List: ###
-- Fix the ugly stuff.
+
 - Add more plugins!
+- Add a generic place(), so it's even easier to write plugins.
 
 
------------------------------------
 
 ### LICENSE ###
 
-Copyright 2011, Ptchfrknzb.com
+Copyright 2011, Ticean Bennett
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
