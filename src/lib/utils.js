@@ -1,58 +1,45 @@
-
 /**
-* Performs an XMLHttpRequest to the NZBMatrix API search.
-* @param url The entire search url.
-* @param callback Function If the response from fetching url has a
-*     HTTP status of 200, this function is called with a JSON decoded
-*     response.  Otherwise, this function is called with null.
-*/
-function doSearchApiRequest(instanceKey, url, callback) {
-    var xhr = new XMLHttpRequest();
-    console.log("Ptchfrknzb: SearchAPI Request: " + url);
-    xhr.onreadystatechange = function(data) {
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
-                var data = xhr.responseText;
-                console.log("Ptchfrknzb: SearchAPI Raw Response: " + data);
-                var response = {instanceKey: instanceKey, data: data};
-                callback(response);
-            } else {
-                callback(null);
-            }
-        }
-    }
-    xhr.open('GET', url, true);
-    xhr.send();
-};
-
-/**
- * Get locally stored data.
- * @param key The localStorage key.
- * @param callback Callback function.
+ * Function : dump()
+ * Arguments: The data - array,hash(associative array),object
+ *    The level - OPTIONAL
+ * Returns  : The textual representation of the array.
+ * This function was inspired by the print_r function of PHP.
+ * This will accept some data as the argument and return a
+ * text that will be a more readable version of the
+ * array/hash/object that is given.
+ * Docs: http://www.openjs.com/scripts/others/dump_function_php_print_r.php
  */
-function getLocalStorage(key, callback) {
-    var val = localStorage[key];
-    callback(val);
+function dump(arr,level) {
+	var dumped_text = "";
+	if(!level) level = 0;
+
+	//The padding given at the beginning of the line.
+	var level_padding = "";
+	for(var j=0;j<level+1;j++) level_padding += "    ";
+
+	if(typeof(arr) == 'object') { //Array/Hashes/Objects
+		for(var item in arr) {
+			var value = arr[item];
+
+			if(typeof(value) == 'object') { //If it is an array,
+				dumped_text += level_padding + "'" + item + "' ...\n";
+				dumped_text += dump(value,level+1);
+			} else {
+				dumped_text += level_padding + "'" + item + "' => \"" + value + "\"\n";
+			}
+		}
+	} else { //Stings/Chars/Numbers etc.
+		dumped_text = "===>"+arr+"<===("+typeof(arr)+")";
+	}
+	return dumped_text;
 }
 
-
-/**
-* Handles data sent via chrome.extension.sendRequest().
-* @param request Object Data sent in the request.
-* @param sender Object Origin of the request.
-* @param callback Function The method to call when the request completes.
-*/
-function onRequest(request, sender, callback) {
-    if (request.action == 'doSearchApiRequest') {
-        doSearchApiRequest(request.instanceKey, request.url, callback);
-    }
-    if (request.action == 'getSettings') {
-        var settings = localStorage;
-        var response = {instanceKey: request.instanceKey, settings: settings};
-        callback(response);
-    }
-};
-
-// Wire up the listener.
-chrome.extension.onRequest.addListener(onRequest);
-
+function formatBytes(bytes, precision)
+{
+    var units = ['b', 'KB', 'MB', 'GB', 'TB'];
+    bytes = Math.max(bytes, 0);
+    var pwr = Math.floor((bytes ? Math.log(bytes) : 0) / Math.log(1024));
+    pwr = Math.min(pwr, units.length - 1);
+    bytes /= Math.pow(1024, pwr);
+    return Math.round(bytes, precision) + ' ' + units[pwr];
+}

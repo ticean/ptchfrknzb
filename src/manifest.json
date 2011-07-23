@@ -1,7 +1,7 @@
 {
 "name": "Ptchfrknzb",
 "description": "Chroming tunes since 2011.",
-"version": "0.1.1",
+"version": "0.1.2",
 "homepage_url": "https://github.com/ticean/ptchfrknzb",
 "icons": {
     "16": "images/icon-16.png",
@@ -17,7 +17,6 @@
 "content_scripts": [
 {
  "js": [
-   "lib/dump.js",
    "lib/jquery-1.6.1.js",
    "lib/underscore.js",
    "lib/toolbox.js",
