@@ -3,9 +3,7 @@ Ptchfrknzb
 
 Ptchfrknzb is a Chrome browser extension that scrapes the content of a webpage and searches NzbMatrix.
 
-It presents the NzbMatrix search results within the webpage, and lets the user take action.
-
-It's like CouchPotato's Automatic Movie Downloader, but it leaves out the vowels.
+It's like CouchPotato's Automatic Movie Downloader, but is applicable to more sites. It also leaves out the vowels.
 
 
 ### Supported Sites ###
