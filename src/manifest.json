@@ -36,11 +36,13 @@
  ]
 }
 ],
-"page_actions": [
+"page_action": [
 {
   "id": "ptchfrknzb_action",
   "name": "ptchfrknzb_page_action",
-  "icons": ["images/icon-16.png"]
+  "icons": ["images/icon-16.png"],
+  "default_title": "Ptchfrknzb Results Found",
+  "default_popup": "results_popup.html"
 }
 ]
 }
