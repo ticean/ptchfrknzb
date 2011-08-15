@@ -20,6 +20,7 @@
    "lib/jquery-1.6.1.js",
    "lib/underscore.js",
    "lib/toolbox.js",
+   "lib/utils.js",
    "lib/ptchfrknzb/NzbMatrix.js",
    "lib/ptchfrknzb/Plugin.js",
    "lib/ptchfrknzb/PluginFactory.js",
