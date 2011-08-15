@@ -51,10 +51,12 @@ function onRequest(request, sender, callback) {
         var response = {instanceKey: request.instanceKey, settings: settings};
         callback(response);
     }
+    if (request.action == 'showPageAction') {
+        chrome.pageAction.setIcon({path: "../images/icon-16.png", tabId: sender.tab.id});
+        chrome.pageAction.show(sender.tab.id);
+        callback();
+    }
 };
 
 // Wire up the listener.
 chrome.extension.onRequest.addListener(onRequest);
-
-
-

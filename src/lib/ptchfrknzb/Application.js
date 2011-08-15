@@ -70,7 +70,10 @@ var Application = Toolbox.Base.extend({
         var instance = window[response.instanceKey];
         var results = instance.nzbMatrix.getSearchResult(response.data);
         if(results){
-            instance.plugin.place(results);
+            //instance.plugin.place(results);
+            chrome.extension.sendRequest({'action': 'showPageAction', 'instanceKey': this.instanceKey}, function(){
+                var foo = 'bar';
+            });
         }
     }
 
