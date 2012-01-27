@@ -47,10 +47,10 @@ var Application = Toolbox.Base.extend({
     },
 
     doSearch: function() {
-        var params, url;
-
+        var params, url, needle;
+        needle = this.plugin.scrape();
         params = {
-            needle: this.plugin.scrape(),
+            needle: needle,
             categoryId: this.plugin.settings.nzbMatrix.categoryId,
             maxResults: this.plugin.settings.nzbMatrix.maxResults
         };
@@ -58,7 +58,7 @@ var Application = Toolbox.Base.extend({
         try {
             url = this.nzbMatrix.getSearchRequest(params);
             if(url){
-                chrome.extension.sendRequest({'action': 'doSearchApiRequest', 'url': url, 'instanceKey': this.instanceKey},
+                chrome.extension.sendRequest({'action': 'doSearchApiRequest', 'url': url, 'instanceKey': this.instanceKey, 'needle': needle},
                         this.handleSearchResults);
             }
         } catch(e) {
@@ -70,10 +70,12 @@ var Application = Toolbox.Base.extend({
         var instance = window[response.instanceKey];
         var results = instance.nzbMatrix.getSearchResult(response.data);
         if(results){
-            //instance.plugin.place(results);
             chrome.extension.sendRequest({'action': 'showPageAction', 'instanceKey': this.instanceKey}, function(){
                 var foo = 'bar';
             });
+            //instance.plugin.place(results);
+        } else {
+            //show no-results icon.
         }
     }
 

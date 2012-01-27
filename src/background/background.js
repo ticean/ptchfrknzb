@@ -1,3 +1,8 @@
+// Global accessor that the popup uses.
+var resultsArray = {};
+var selectedResults = null;
+var selectedId = null;
+
 
 /**
 * Performs an XMLHttpRequest to the NZBMatrix API search.
@@ -6,24 +11,45 @@
 *     HTTP status of 200, this function is called with a JSON decoded
 *     response.  Otherwise, this function is called with null.
 */
-function doSearchApiRequest(instanceKey, url, callback) {
+function doSearchApiRequest(request, sender, callback) {
     var xhr = new XMLHttpRequest();
-    console.log("Ptchfrknzb: SearchAPI Request: " + url);
+    console.log("Ptchfrknzb: SearchAPI Request: " + request.url);
     xhr.onreadystatechange = function(data) {
         if (xhr.readyState == 4) {
             if (xhr.status == 200) {
                 var data = xhr.responseText;
                 console.log("Ptchfrknzb: SearchAPI Raw Response: " + data);
-                var response = {instanceKey: instanceKey, data: data};
+                var response = {instanceKey: request.instanceKey, data: data};
+                chrome.tabs.sendRequest(sender.tabId, response, function(){});
                 callback(response);
             } else {
                 callback(null);
             }
         }
     }
-    xhr.open('GET', url, true);
+    xhr.open('GET', request.url, true);
     xhr.send();
 };
+
+function updateResultsContent(tabId) {
+  chrome.tabs.sendRequest(tabId, {}, function(results) {
+    resultsArray[tabId] = results;
+    if (!results) {
+      chrome.pageAction.hide(tabId);
+    } else {
+      chrome.pageAction.show(tabId);
+      if (selectedId == tabId) {
+        updateSelected(tabId);
+      }
+    }
+  });
+}
+
+function updateSelected(tabId) {
+  selectedResults = resultsArray[tabId];
+  if (selectedResults)
+    chrome.pageAction.setTitle({tabId:tabId, title:selectedResults});
+}
 
 /**
  * Get locally stored data.
